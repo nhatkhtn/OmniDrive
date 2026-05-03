@@ -1,0 +1,6 @@
+[submodule "mmdetection3d"]
+	path = mmdetection3d
+	url = https://github.com/open-mmlab/mmdetection3d.git
+[submodule "OpenLane-V2"]
+	path = OpenLane-V2
+	url = https://github.com/OpenDriveLab/OpenLane-V2.git
