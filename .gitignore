@@ -10,6 +10,7 @@ results_planning_only*/
 deploy/llm_lib/llm_checkpoint*/
 deploy/llm_lib/llm_engine*/
 deploy/llm_lib/llm_safetensor*/
+**/__pycache__/
 
 .vscode
 *.ignore
