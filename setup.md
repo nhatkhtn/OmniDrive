@@ -17,6 +17,11 @@ curl -L -O https://github.com/NVlabs/OmniDrive/releases/download/v1.0/data_nusc.
 ```
 
 ```bash
+curl -L -O  https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-trainval_meta.tgz
+curl -L -O https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/nuScenes-map-expansion-v1.3.zip
+```
+
+```bash
 uv run hf download exiawsh/pretrain_qformer --local-dir ./ckpts/pretrain_qformer
 ```
 
@@ -30,6 +35,10 @@ PORT=29501 CUDA_VISIBLE_DEVICES=0 uv run tools/dist_test.sh projects/configs/Omn
 
 ```bash
 PORT=29501 uv run tools/dist_test.sh projects/configs/OmniDrive/mask_eva_lane_det_vlm.py ckpts/OmniDrive/iter_10548.pth 2 --format-only
+```
+
+```bash
+uv run eval_planning.py --pred_path ../results_planning_only/ --anno_path nuscenes2d_ego_temporal_infos_val.pkl
 ```
 
 # Architecture
