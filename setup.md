@@ -34,16 +34,6 @@ PORT=29501 uv run tools/dist_test.sh projects/configs/OmniDrive/mask_eva_lane_de
 
 # Architecture
 
-I’m rewriting the explanation around the actual tensor flow and will include only shapes that the code makes explicit.
-
-Read [](file:///home/hoangx/workspace/OmniDrive/projects/mmdet3d_plugin/models/detectors/petr3d.py#190-190), lines 190 to 248
-
-Read [](file:///home/hoangx/workspace/OmniDrive/projects/mmdet3d_plugin/models/detectors/petr3d.py#270-270), lines 270 to 315
-
-Read [](file:///home/hoangx/workspace/OmniDrive/projects/mmdet3d_plugin/models/detectors/petr3d.py#415-415), lines 415 to 450
-
-Read [](file:///home/hoangx/workspace/OmniDrive/projects/configs/OmniDrive/mask_eva_lane_det_vlm.py#191-191), lines 191 to 199
-
 Here is the corrected test-time summary, with the geometry part made explicit and the input shapes stated as the code uses them.
 
 **Architecture**
