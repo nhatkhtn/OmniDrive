@@ -99,8 +99,12 @@ Inputs after `forward_test` normalization (B=1, N=6):
 
 Text prompt source (test-only):
 
-- LoadAnnoatationVQATest builds one question: "Please provide the planning trajectory for the ego car without reasons." ([transform_3d.py#L765-L765](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/pipelines/transform_3d.py#L765-L765)).
-- It prepends `<image>\nYou are driving in {location}. ` and then tokenizes with the Vicuna-v1 template ([transform_3d.py#L836-L836](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/pipelines/transform_3d.py#L836-L836), [conversation.py#L252-L252](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/utils/conversation.py#L252-L252), and [data_utils.py#L167-L167](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/utils/data_utils.py#L167-L167)).
+- The exact text prompt fed to the model is assembled using the Vicuna-v1 conversational template. It takes the form `[system prompt] USER: [image] [location context] [instruction] ASSISTANT:`:
+  - **`[system prompt]`**: `"A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. "` ([conversation.py#L253-L254](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/utils/conversation.py#L253-L254)).
+  - **`USER:`** and **`ASSISTANT:`**: The role identifiers for the template ([conversation.py#L255-L255](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/utils/conversation.py#L255-L255)).
+  - **`[image] [location context]`**: `<image>\nYou are driving in {location}. ` The visual sentinel and dynamic location context ([transform_3d.py#L831-L836](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/pipelines/transform_3d.py#L831-L836)).
+  - **`[instruction]`**: `"Please provide the planning trajectory for the ego car without reasons."` ([transform_3d.py#L764-L766](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/pipelines/transform_3d.py#L764-L766)).
+  - Tokenization is finally applied via `preprocess` ([data_utils.py#L167-L167](https://github.com/nhatkhtn/OmniDrive/blob/1c96135300de667073716efa283478c0aaab641c/projects/mmdet3d_plugin/datasets/utils/data_utils.py#L167-L167)).
 
 Visual token source:
 
